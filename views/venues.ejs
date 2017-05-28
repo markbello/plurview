@@ -2,6 +2,15 @@
 
     <h1>Venues</h1>
 
-    <a href="/">Home</a>
+    <% venues.forEach(function(venue){ %>
+        <div>
+            <h4>
+                <%= venue.name %>
+            </h4>
+            <img src="<%= venue.image %>" </div>
+        </div>
+        <% }); %>
 
-    <% include partials/footer %>
+            <a href="/">Home</a>
+
+            <% include partials/footer %>
