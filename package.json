@@ -1,0 +1,26 @@
+{
+    "name": "plurview",
+    "version": "1.0.0",
+    "description": "Rave Reviews",
+    "main": "app.js",
+    "scripts": {
+        "start: "
+        node app.js "
+    },
+    "keywords": [
+        "plur",
+        "edm",
+        "rave",
+        "techno",
+        "trap",
+        "dubstep",
+        "house",
+        "trance",
+        "reviews"
+    ],
+    "author": "Mark Bello",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.15.3"
+    }
+}
