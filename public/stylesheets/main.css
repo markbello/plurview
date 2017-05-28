@@ -1,5 +1,5 @@
 body {
-    background: url(https://unsplash.com/search/rave?photo=oykCWyimVDc);
+    background: url("https://unsplash.com/search/rave?photo=oykCWyimVDc");
     background-size: cover;
     color: white;
 }
