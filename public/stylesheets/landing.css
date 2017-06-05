@@ -15,10 +15,6 @@
   }
 }
 
-body {
-  background-color: #000;
-}
-
 .slideshow { 
   position: fixed;
   width: 100%;
