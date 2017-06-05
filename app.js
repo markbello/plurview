@@ -16,8 +16,8 @@ var commentRoutes       = require("./routes/comments"),
     venueRoutes         = require("./routes/venues"),
     indexRoutes         = require("./routes/index");
 
-// mongoose.connect(process.env.DATABASEURL);
-mongoose.connect("mongodb://localhost/plurview");
+mongoose.connect(process.env.DATABASEURL);
+// mongoose.connect("mongodb://localhost/plurview");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
