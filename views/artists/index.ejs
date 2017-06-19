@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 
-<div class="container">
+
     <header class="jumbotron">
         <div class="container">
             <h1>Artists</h1>
@@ -8,11 +8,11 @@
     <div >
         <a class="btn btn-primary btn-large" href="/artists/new">Add New Artist</a>
     </div>
-        </div>
+
     
-</header>
+    </header>
     
-<div class="row text-center" style="display: flex; flex-wrap: wrap;">
+    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
      <% artists.forEach(function(artist){ %>
         <div class="col-md-3 col-sm-6">
             <div class="thumbnail">
@@ -22,18 +22,16 @@
                 </div>
                 <div>
                 <a href="/artists/<%= artist._id %>" class="btn btn-primary">More Info</a>
+                </div>
             </div>
-            </div>
-            
-            
         </div>
         <% }); %>
-</div>
+    </div>
 
    
 
             <a class="btn btn-primary btn-large" href="/">Home</a>
-</div>
 
 
-            <% include ../partials/footer %>
+
+<% include ../partials/footer %>

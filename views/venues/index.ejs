@@ -1,39 +1,39 @@
 <% include ../partials/header %>
 
-<div class="container">
+
     <header class="jumbotron">
         <div class="container">
             <h1>Venues</h1>
-    <p>Know where you're going</p>
+        <p>Know where you're going</p>
     <div >
         <a class="btn btn-primary btn-large" href="/venues/new">Add New Venue</a>
     </div>
-        </div>
+
     
-</header>
+    </header>
     
-<div class="row text-center" style="display: flex; flex-wrap: wrap;">
-     <% venues.forEach(function(venue){ %>
-        <div class="col-md-3 col-sm-6">
-            <div class="thumbnail">
-                <img src="<%= venue.image %>" </div>
-                <div class="caption">
-                    <h4><%= venue.name %></h4>
+    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
+         <% venues.forEach(function(venue){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                    <img src="<%= venue.image %>" </div>
+                    <div class="caption">
+                        <h4><%= venue.name %></h4>
+                    </div>
+                    <div>
+                    <a href="/venues/<%= venue._id %>" class="btn btn-primary">More Info</a>
                 </div>
-                <div>
-                <a href="/venues/<%= venue._id %>" class="btn btn-primary">More Info</a>
+                </div>
+                
+                
             </div>
-            </div>
-            
-            
-        </div>
-        <% }); %>
-</div>
+            <% }); %>
+    </div>
 
    
 
             <a class="btn btn-primary btn-large" href="/">Home</a>
-</div>
+
 
 
             <% include ../partials/footer %>
