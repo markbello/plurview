@@ -1,6 +1,7 @@
 
 var Comment = require("../models/comment");
 var Venue = require("../models/venue");
+var Artist = require("../models/artist");
 
 var middlewareObj = {};
 
@@ -12,6 +13,26 @@ middlewareObj.checkVenueOwnership = function(req, res, next){
                 res.redirect("back");
             } else{
                 if(foundVenue.author.id.equals(req.user._id)) {
+                    next();
+                } else{
+                    req.flash("error", "You don't have permission to do that");
+                    res.redirect("back");
+                }
+            }
+        });
+    } else{
+        res.redirect("back");
+    }
+};
+
+middlewareObj.checkArtistOwnership = function(req, res, next){
+    if(req.isAuthenticated()){
+        Artist.findById(req.params.id, function(err, foundVenue){
+            if(err){
+                req.flash("error", "Artist not found");
+                res.redirect("back");
+            } else{
+                if(foundArtist.author.id.equals(req.user._id)) {
                     next();
                 } else{
                     req.flash("error", "You don't have permission to do that");

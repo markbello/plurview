@@ -4,6 +4,7 @@ var express             = require("express"),
     mongoose            = require("mongoose"),
     flash               = require("connect-flash"),
     Venue               = require("./models/venue"),
+    Artist              = require("./models/artist"),
     Comment             = require("./models/comment"),
     User                = require("./models/user"),
     passport            = require("passport"),
@@ -14,17 +15,18 @@ var express             = require("express"),
 
 var commentRoutes       = require("./routes/comments"),
     venueRoutes         = require("./routes/venues"),
+    artistRoutes        = require("./routes/artists"),
     indexRoutes         = require("./routes/index");
 
-mongoose.connect(process.env.DATABASEURL);
-// mongoose.connect("mongodb://localhost/plurview");
+// mongoose.connect(process.env.DATABASEURL);
+mongoose.connect("mongodb://localhost/plurview");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-// seedDB();
+seedDB();
 
 //PASSPORT CONFIGURATION    
 
@@ -49,6 +51,7 @@ app.use(function(req, res, next){
 
 app.use("/", indexRoutes);
 app.use("/venues", venueRoutes);
+app.use("/artists", artistRoutes);
 app.use("/venues/:id/comments/", commentRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function() {
