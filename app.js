@@ -11,7 +11,7 @@ var express             = require("express"),
     LocalStrategy       = require("passport-local"),
     FacebookStrategy    = require("passport-facebook"),
     methodOverride      = require("method-override");
-    seedDB              = require("./seeds");
+    // seedDB              = require("./seeds");
 
 var commentRoutes       = require("./routes/comments"),
     venueRoutes         = require("./routes/venues"),
@@ -26,7 +26,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-seedDB();
+// seedDB();
 
 //PASSPORT CONFIGURATION    
 
