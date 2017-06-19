@@ -58,48 +58,48 @@ function seedDB(){
 
 module.exports = seedDB;
 
-venueData.forEach(function(seed){
-    Venue.create(seed,function(err, venue){
-        if(err){
-            console.log(err);
-        } else{
-            console.log("added a venue");
-            // Comment.create(
-            //     {
-            //         text: "This place was great, there were too many people!", author: "Mark"
-            //     }, function(err, comment){
-            //         if(err){
-            //             console.log(err);
-            //         } else{
-            //             venue.comments.push(comment);
-            //             venue.save();
-            //             console.log("Created new comment");
-            //         }
-            //     }
-            // );
-        }
-    });
-});
+// venueData.forEach(function(seed){
+//     Venue.create(seed,function(err, venue){
+//         if(err){
+//             console.log(err);
+//         } else{
+//             console.log("added a venue");
+//             // Comment.create(
+//             //     {
+//             //         text: "This place was great, there were too many people!", author: "Mark"
+//             //     }, function(err, comment){
+//             //         if(err){
+//             //             console.log(err);
+//             //         } else{
+//             //             venue.comments.push(comment);
+//             //             venue.save();
+//             //             console.log("Created new comment");
+//             //         }
+//             //     }
+//             // );
+//         }
+//     });
+// });
 
-artistData.forEach(function(seed){
-    Artist.create(seed,function(err, venue){
-        if(err){
-            console.log(err);
-        } else{
-            console.log("added an artist");
-            // Comment.create(
-            //     {
-            //         text: "This place was great, there were too many people!", author: "Mark"
-            //     }, function(err, comment){
-            //         if(err){
-            //             console.log(err);
-            //         } else{
-            //             venue.comments.push(comment);
-            //             venue.save();
-            //             console.log("Created new comment");
-            //         }
-            //     }
-            // );
-        }
-    });
-});
+// artistData.forEach(function(seed){
+//     Artist.create(seed,function(err, venue){
+//         if(err){
+//             console.log(err);
+//         } else{
+//             console.log("added an artist");
+//             // Comment.create(
+//             //     {
+//             //         text: "This place was great, there were too many people!", author: "Mark"
+//             //     }, function(err, comment){
+//             //         if(err){
+//             //             console.log(err);
+//             //         } else{
+//             //             venue.comments.push(comment);
+//             //             venue.save();
+//             //             console.log("Created new comment");
+//             //         }
+//             //     }
+//             // );
+//         }
+//     });
+// });
