@@ -13,7 +13,7 @@ router.get("/", function(req, res) {
         if(err){
             console.log(err);
         } else{
-            res.render("artists/index", {artists:allArtists});
+            res.render("artists/index", {artists:allArtists, page: "artists"});
         }
     });
 });

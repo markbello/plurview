@@ -13,7 +13,7 @@ router.get("/", function(req, res) {
 
 // SHOW REGISTER FORM
 router.get("/register", function(req, res){
-    res.render("register");
+    res.render("register", {page: "register"});
 });
 
 // HANDLE SIGN UP LOGIC
@@ -21,9 +21,9 @@ router.post("/register", function(req, res){
     var newUser = new User ({username: req.body.username});
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-            req.flash("error", err.message);
-            return res.render("register");
-        } 
+            console.log(err);
+            return res.render("register", {error: err.message});
+        }
         
         passport.authenticate("local")(req, res, function(){
             req.flash("success", "Welcome to PLURview" + user.username);
@@ -35,7 +35,7 @@ router.post("/register", function(req, res){
 
 // SHOW LOGIN FORM
 router.get("/login", function(req, res){
-    res.render("login");
+    res.render("login", {page: "login"});
 });
 
 // HANDLE LOGIN LOGIC

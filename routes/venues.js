@@ -13,7 +13,7 @@ router.get("/", function(req, res) {
         if(err){
             console.log(err);
         } else{
-            res.render("venues/index", {venues:allVenues});
+            res.render("venues/index", {venues:allVenues, page: "venues"});
         }
     });
 });
