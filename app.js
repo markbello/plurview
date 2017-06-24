@@ -21,9 +21,6 @@ var commentRoutes       = require("./routes/comments"),
 var url = process.env.DATABASEURL || "mongodb://localhost/plurview";
 mongoose.connect(url);
 
-// mongoose.connect(process.env.DATABASEURL);
-// mongoose.connect("mongodb://localhost/plurview");
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
