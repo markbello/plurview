@@ -11,36 +11,28 @@
 </head>
 
 <body>
+    <nav class="ui inverted pointing menu">
+          <a class="header item">
+            PLURview
+          </a>
+          <a class="item <%= typeof page !== 'undefined' && page === 'venues' ? 'active' : '' %>" href="/venues">Venues
     
-    <nav class="navbar navbar-default">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="/">PLURview</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="<%= typeof page !== 'undefined' && page === 'venues' ? 'active' : '' %>"><a href="/venues">Venues</a></li>
-            <li class="<%= typeof page !== 'undefined' && page === 'artists' ? 'active' : '' %>"><a href="/artists">Artists</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-              <% if(!currentUser){ %>
-                  <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
-                  <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
-              <% } else { %>
-                  <li><a href="#">Signed In As <%= currentUser.username %></a></li>
-                  <li><a href="/logout">Logout</a></li>
-              <% } %>
-          </ul>
-        </div>
-    </div>
-</nav>
+          </a>
+          <a class="item <%= typeof page !== 'undefined' && page === 'artists' ? 'active' : '' %>" href="/venues">Artists
+            
+          </a>
+          <div class="right menu">
+            <% if(!currentUser){ %>
+                  <a class="item <%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>" href="/login">Login</a>
+                  <a class="item <%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>" href="/register">Sign Up</a>
+            <% } else { %>
+                  <div class="item">Signed In As <%= currentUser.username %></div>
+                  <a class="item" href="/logout">Logout</a>
+            <% } %>
+          </div>
+    </nav>
+    
+    
     
     <div class="container">
         <% if(error && error.length > 0) { %>
