@@ -8,6 +8,7 @@ var venueSchema = new mongoose.Schema({
     location: String,
     lat: Number,
     lng: Number,
+    lastUpdated: { type: Date, default: Date.now },
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

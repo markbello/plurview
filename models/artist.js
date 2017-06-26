@@ -4,6 +4,7 @@ var artistSchema = new mongoose.Schema({
     name: String,
     logo: String,
     blurb: String,
+    lastUpdated: { type: Date, default: Date.now },
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
