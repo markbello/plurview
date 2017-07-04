@@ -2,14 +2,37 @@ var express     = require("express");
 var router      = express.Router();
 var passport    = require("passport");
 var User        = require("../models/user");
-
+var Venue       = require("../models/venue");
+var Artist      = require("../models/artist");
+var middleware  = require("../middleware");
 
 // ROOT ROUTE
 router.get("/", function(req, res) {
-    res.render("landing");
+    
+    Venue.find({}, function(err, allVenues){
+        if(err){
+            console.log(err);
+        } else{
+            Artist.find({}, function(err, allArtists){
+                if(err){
+                    console.log(err);
+                } else{
+                    res.render("landing", {venues:allVenues, artists:allArtists});
+                }
+            });
+            
+        }
+    });
+    
+    
+    
 });
 
-// AUTH ROUTES
+// PROFILE ROUTE
+
+router.get('/profile', middleware.isLoggedIn, function(req, res){
+		res.render('profile', { user: req.user });
+	});
 
 
 // SHOW REGISTER FORM
@@ -55,7 +78,6 @@ router.get("/logout", function(req, res){
     req.flash("success", "Logged you out!");
     res.redirect("back");
 });
-
 
 
 module.exports = router;
