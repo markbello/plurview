@@ -16,11 +16,11 @@
         <div class="col-md-9">
             <div class="thumbnail"><img class="img-responsive" src="<%= venue.image %>">
                 <div class="caption-full">
-                    <h4 class="pull-right">$<%= venue.price %>/General Admission</h4>
+
                     <h4><a href="#"><%= venue.name %></a></h4>
                     <p><%= venue.address %></p>
                     <p><em>Added by <%= venue.author.username %>, <%= moment(venue.createdAt).fromNow() %></em></p>
-                    <% if(currentUser && venue.author.id.equals(currentUser._id)){ %>
+                    <% if(currentUser && venue.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                         <a class="btn btn-warning" href="/venues/<%= venue._id %>/edit">Edit Venue</a>
                         <form class="delete-form" action="/venues/<%= venue._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-danger">Delete</button>

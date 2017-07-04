@@ -23,9 +23,7 @@ router.get("/", function(req, res) {
 
 router.post("/", middleware.isLoggedIn, function(req, res) {
     var name = req.body.name;
-    var price = req.body.price;
     var image = req.body.image;
-    var address = req.body.address;
     var author = {
         id: req.user._id,
         username: req.user.username
@@ -86,7 +84,7 @@ router.put("/:id", middleware.checkVenueOwnership, function(req, res){
     var lng = data.results[0].geometry.location.lng;
     var location = data.results[0].formatted_address;
     var newData = {name: req.body.name, image: req.body.image, location: location, lat: lat, lng: lng};
-    Venue.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, venue){
+    Venue.findByIdAndUpdate(req.params.id, req.body.venue, function(err, venue){
         if(err){
             req.flash("error", err.message);
             res.redirect("back");

@@ -1,13 +1,4 @@
- <!DOCTYPE html>
-<html>
-    <head>
-        <title>PLURview</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/stylesheets/main.css">
-        <link rel="stylesheet" href="/stylesheets/landing.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
-    </head>
-    <body>
+<% include ./partials/header %>
     
     <div class="container">
         <% if(error && error.length > 0){ %>
@@ -22,18 +13,101 @@
         <% } %>
     </div>
     
-    <div id="landing-header">
- 		<h1>Welcome to PLURview!</h1>
-		<a href="/venues" class="btn btn-lg btn-warning">View All Venues</a>
-		<a href="/artists" class="btn btn-lg btn-success">View All Artists</a>
+    <div class="container">
+        <div id="landing-header">
+ 		
+ 		
+ 		<div class="ui padded centered four column grid">
+    <div class="ui cards">
+        <% if(!currentUser){ %>
+            <div class="ui card">
+                <div class="content">
+                    <div class="header">Welcome to PLURview</div>
+                    
+                </div>
+                <div class="extra content">
+                    <div class="description" style="text-align: left">
+                        <p>We're building a roster of favorite acts and venues so we can start comparing notes.</p> 
+                    </div>
+                </div>
+                <div class="extra content">
+                    
+                    <a href="/login"><button class = "ui blue button">Login</button></a>
+                    <a href="/register"><button class = "ui green button" href="/register">Sign Me Up!</button></a>
+                    
+                    
+                </div>
+                
+            </div>
+        <% } %>
+        
+        <% if(currentUser){ %>
+            <div class="ui card">
+                <div class="content">
+                    <div class="header">What DJs should we follow?</div>
+                    
+                </div>
+                <div class="content">
+                    <form action="/artists/" method="post">
+                        
+                        <div class="description">
+                            <p>Add your faves to our list</p> 
+                        </div>
+                        
+                        <div class="item" style="margin: 25px auto;">
+                            <div class="ui icon input">
+                                <input type="text" name="name" placeholder="Artist Name">
+                            </div>
+                        </div>
+                        
+                        <div class="content">
+                            <button class = "huge ui green button">Add an Artist</a>
+                        </div>
+                        
+                    </form>
+            </div>
+            </div>
+            
+            <div class="ui card">
+                <div class="content">
+                    <div class="header">Where do you rave?</div>
+                    
+                </div>
+                <div class="content">
+                    <form action="/venues" method="post">
+                        
+                        <div class="description">
+                            <p>Tell us the hot spots</p> 
+                        </div>
+                        
+                        <div class="item" style="margin: 25px auto;">
+                            <div class="ui icon input">
+                                <input type="text" name="name" placeholder="Venue Name">
+                                <input class="hidden" type="text" name="location" value="125 E 11th St, New York, NY 10003">
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="content">
+                            <button class = "huge ui blue button">Add a Venue</a>
+                        </div>
+                        
+                    </form>
+                    
+                </div>
+                
+            </div>
+            
+            
+        <% }; %>
     </div>
     
-    <!--<ul class="slideshow">-->
-    <!--  <li></li>-->
-    <!--  <li></li>-->
-    <!--  <li></li>-->
-    <!--  <li></li>-->
-    <!--  <li></li>-->
-    <!--</ul>-->
+</div>
+ 		
+
+    </div>
+    </div>
+    
+ 
 
 <% include partials/footer %>

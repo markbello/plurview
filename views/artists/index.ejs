@@ -1,36 +1,63 @@
 <% include ../partials/header %>
 
-
-    <header class="jumbotron">
-        <div class="container">
-            <h1>Artists</h1>
-    <p>Know who you're seeing</p>
-    <div >
-        <a class="btn btn-primary btn-large" href="/artists/new">Add New Artist</a>
-    </div>
-
-    
-    </header>
-    
-    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
-     <% artists.forEach(function(artist){ %>
-        <div class="col-md-3 col-sm-6">
-            <div class="thumbnail">
-                <img src="<%= artist.logo %>" </div>
-                <div class="caption">
-                    <h4><%= artist.name %></h4>
-                </div>
-                <div>
-                <a href="/artists/<%= artist._id %>" class="btn btn-primary">More Info</a>
+<div class="ui padded centered four column doubling grid">
+    <div class="ui cards">
+        <div class="ui card">
+            <div class="content">
+                <div class="header">Who's your favorite DJ?</div>
+                
+            </div>
+            <div class="extra content">
+                <div class="description">
+                    <p>Spread some love- we're building a list of favorite acts so we can start comparing notes.</p> 
+                    <p>If you're curious about someone you don't see on this list, please add them too!</p>
                 </div>
             </div>
+            <div class="extra content">
+                <% if(!currentUser){ %>
+                    <a href="/login"><button class = "ui blue button">Login</button></a>
+                    <a href="/register"><button class = "ui green button" href="/register">Sign Me Up!</button></a>
+                <% } else { %>
+                  <a class = "huge ui green button" href="/artists/new">Add an Artist</a>
+                <% } %>
+                
+            </div>
+            
         </div>
+        
+        <% artists.forEach(function(artist){ %>
+            <div class="ui card" href="/artists/<%= artist._id %>">
+                
+                <div class="content">
+                    <% if(artist.logo){ %>
+                        <a class="ui image" href="/artists/<%= artist._id %>"><img src="<%= artist.logo %>"></a>
+                    <% } else { %>
+                        <div class="header"><%= artist.name %></div>
+                    <% }; %>
+                </div>
+                <div class="content">
+                    
+                    <div class="description"><%= artist.blurb %></div>
+                    
+                </div>
+                <div class="extra content">
+                    
+                    <% if(currentUser && artist.author.id.equals(currentUser._id)){ %>
+                    
+                        <a href="/artists/<%= artist._id %>/edit"><button class="ui blue button">Edit Artist</button></a>
+                        <form class="delete-form" action="/artists/<%= artist._id %>?_method=DELETE" method="POST">
+                            <button class="ui negative button">Delete</button>
+                        </form>
+                    
+                        
+                    <% }; %>
+                </div>
+                
+            </div>
         <% }); %>
     </div>
-
-   
-
-            <a class="btn btn-primary btn-large" href="/">Home</a>
+    
+</div>
 
 
 

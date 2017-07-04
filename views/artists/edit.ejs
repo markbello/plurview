@@ -5,23 +5,33 @@
     
 <div style="width: 40%; margin: 25px auto;">
       <form action="/artists/<%= artist._id %>?_method=PUT" method="POST">
-          <div class="form-group">
-              <input class="form-control" type="text" name="artist[name]" value="<%= artist.name %>">
-          </div>
           
-          <div class="form-group">
-              <input class="form-control" type="text" name="artist[logo]" value="<%= artist.logo %>">
-          </div>
+          <div class="ui card" style="width: 300px; margin: 25px auto;">
+                <div class="content">
+                    <div class="header">
+                        List a New Artist
+                    </div>
+                </div>
+                <div class="content">
+                    
+                    <div class="ui fluid input" style="margin: 15px auto">
+                        <input class="form-control" type="text" name="artist[name]" value="<%= artist.name %>">
+                    </div>
+                    <div class="ui fluid input" style="margin: 15px auto">
+                        <input class="form-control" type="text" name="artist[logo]" value="<%= artist.logo %>" placeholder="Logo URL">
+                    </div>
+                    <div class="ui fluid input" style="margin: 15px auto">
+                        <input class="form-control" type="text" name="artist[blurb]" value="<%= artist.blurb %>" placeholder="Artist">
+                    </div>
+                    <div class="ui fluid input" style="margin: 25px auto">
+                        <button class="ui fluid blue button">Submit</button>
+                    </div>
+                
+                </div>
+            </div>
           
-          <div class="form-group">
-              <input class="form-control" type="text" name="artist[blurb]" value="<%= artist.blurb %>">
-          </div>
           
-          <div class="form-group">
-              <button class="btn btn-lg btn-primary btn-block">Submit!</button>
-          </div>
     </form>
-    <a href="/artists">Back to Artists</a>
 
   
     

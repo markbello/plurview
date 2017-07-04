@@ -1,26 +1,36 @@
 <% include ../partials/header %>
 
-     <h1 style="text-align: center;">List a New Artist</h1>
+     
     
-    
-<div style="width: 40%; margin: 25px auto;">
+<div style="width: 300px; margin: 25px auto;">
       <form action="/artists" method="POST">
-          <div class="form-group">
-              <input class="form-control" type="text" name="name" placeholder="name">
-          </div>
-          <div class="form-group">
-              <input class="form-control" type="text" name="logo" placeholder="logo url">
-          </div>
           
-          <div class="form-group">
-              <input class="form-control" type="text" name="blurb" placeholder="blurb">
-          </div>
+           <div class="ui card" style="width: 300px; margin: 25px auto;">
+                <div class="content">
+                    <div class="header">
+                        List a New Artist
+                    </div>
+                </div>
+                <div class="content">
+                    
+                    <div class="ui fluid input" style="margin: 15px auto">
+                        <input class="form-control" type="text" name="name" placeholder="Name">
+                    </div>
+                    <div class="ui fluid input" style="margin: 15px auto">
+                        <input class="form-control" type="text" name="logo" placeholder="Logo URL">
+                    </div>
+                    <div class="ui fluid input" style="margin: 15px auto">
+                        <input class="form-control" type="text" name="blurb" id="blurb" placeholder="Blurb">
+                    </div>
+                    <div class="ui fluid input" style="margin: 25px auto">
+                        <button class="ui fluid blue button">Submit</button>
+                    </div>
+                
+                </div>
+            </div>
           
-          <div class="form-group">
-              <button class="btn btn-lg btn-primary btn-block">Submit!</button>
-          </div>
+          
     </form>
-    <a href="/artists">Back to Artists</a>
 
   
     

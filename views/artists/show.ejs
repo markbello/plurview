@@ -19,7 +19,7 @@
                     <h4><a href="#"><%= artist.name %></a></h4>
                     <p><%= artist.blurb %></p>
                     <p><em>Added by <%= artist.author.username %>, <%= moment(artist.createdAt).fromNow() %></em></p>
-                    <% if(currentUser && artist.author.id.equals(currentUser._id)){ %>
+                    <% if(currentUser && artist.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                         <a class="btn btn-warning" href="/artists/<%= artist._id %>/edit">Edit Artist</a>
                         <form class="delete-form" action="/artists/<%= artist._id %>?_method=DELETE" method="POST">
                             <button class="btn btn-danger">Delete</button>

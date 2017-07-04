@@ -62,17 +62,17 @@ router.get("/:id", function(req, res){
 router.get("/:id/edit", middleware.checkArtistOwnership, function(req, res){
    Artist.findById(req.params.id, function(err, foundArtist){
        if(err){
-           req.flash("error", "Please login to edit vanue information");
+           req.flash("error", "Please login to edit artist information");
            res.redirect("back");
        } else{
-           res.render("artists/edit", {venue: foundArtist});
+           res.render("artists/edit", {artist: foundArtist});
        }
    }); 
 }); 
 
 // UPDATE ARTIST
 router.put("/:id", middleware.checkArtistOwnership, function(req, res){
-   Artist.findByIdAndUpdate(req.params.id, req.body.venue, function(err, updatedArtist){
+   Artist.findByIdAndUpdate(req.params.id, req.body.artist, function(err, updatedArtist){
        if(err){
            res.redirect("/artists");
        } else{

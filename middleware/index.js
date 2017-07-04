@@ -12,7 +12,7 @@ middlewareObj.checkVenueOwnership = function(req, res, next){
                 req.flash("error", "Venue not found");
                 res.redirect("back");
             } else{
-                if(foundVenue.author.id.equals(req.user._id)) {
+                if(foundVenue.author.id.equals(req.user._id) || req.user.isAdmin) {
                     next();
                 } else{
                     req.flash("error", "You don't have permission to do that");
@@ -27,12 +27,12 @@ middlewareObj.checkVenueOwnership = function(req, res, next){
 
 middlewareObj.checkArtistOwnership = function(req, res, next){
     if(req.isAuthenticated()){
-        Artist.findById(req.params.id, function(err, foundVenue){
+        Artist.findById(req.params.id, function(err, foundArtist){
             if(err){
                 req.flash("error", "Artist not found");
                 res.redirect("back");
             } else{
-                if(foundArtist.author.id.equals(req.user._id)) {
+                if(foundArtist.author.id.equals(req.user._id) || req.user.isAdmin) {
                     next();
                 } else{
                     req.flash("error", "You don't have permission to do that");
@@ -51,7 +51,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
             if(err){
                 res.redirect("back");
             } else{
-                if(foundComment.author.id.equals(req.user._id)) {
+                if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin) {
                     next();
                 } else{
                     req.flash("error", "You don't have permission to do that");

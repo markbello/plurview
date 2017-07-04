@@ -3,6 +3,7 @@ var router      = express.Router();
 var passport    = require("passport");
 var User        = require("../models/user");
 
+
 // ROOT ROUTE
 router.get("/", function(req, res) {
     res.render("landing");
@@ -19,6 +20,9 @@ router.get("/register", function(req, res){
 // HANDLE SIGN UP LOGIC
 router.post("/register", function(req, res){
     var newUser = new User ({username: req.body.username});
+    if(req.body.adminCode === "secretcode123"){
+        newUser.isAdmin = true;
+    }
     User.register(newUser, req.body.password, function(err, user){
         if(err){
             console.log(err);
@@ -26,8 +30,8 @@ router.post("/register", function(req, res){
         }
         
         passport.authenticate("local")(req, res, function(){
-            req.flash("success", "Welcome to PLURview" + user.username);
-            res.redirect("/venues");
+            req.flash("success", "Welcome to PLURview " + user.username);
+            res.redirect("back");
         });
     });
     
@@ -41,7 +45,7 @@ router.get("/login", function(req, res){
 // HANDLE LOGIN LOGIC
 router.post("/login", passport.authenticate("local", 
     {
-        successRedirect: "/venues",
+        successRedirect: "/",
         failureRedirect: "/login"
     }));
     
@@ -49,7 +53,7 @@ router.post("/login", passport.authenticate("local",
 router.get("/logout", function(req, res){
     req.logout();
     req.flash("success", "Logged you out!");
-    res.redirect("/venues");
+    res.redirect("back");
 });
 
 
