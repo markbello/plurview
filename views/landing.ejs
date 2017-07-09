@@ -1,107 +1,157 @@
 <% include ./partials/header %>
     
-    <div class="container">
-        <% if(error && error.length > 0){ %>
-            <div class="alert alert-danger" role="alert">
-                <%= error %>
-            </div>
-        <% } %>
-        <% if(success && success.length > 0){ %>
-            <div class="alert alert-success" role="alert">
-                <%= success %>
-            </div>
-        <% } %>
-    </div>
-    
-    <div class="container">
-        <div id="landing-header">
- 		
- 		
- 		<div class="ui padded centered four column grid">
-    <div class="ui cards">
-        <% if(!currentUser){ %>
-            <div class="ui card">
-                <div class="content">
-                    <div class="header">Welcome to PLURview</div>
-                    
-                </div>
-                <div class="extra content">
-                    <div class="description" style="text-align: left">
-                        <p>We're building a roster of favorite acts and venues so we can start comparing notes.</p> 
+<div class="container">
+ 	<div class="ui padded centered four column grid">
+        <div class="ui cards">
+            <% if(!currentUser){ %>
+                <div class="ui card">
+                    <div class="content">
+                        <div class="header">Welcome to PLURview</div>
+                        
                     </div>
+                    <div class="extra content">
+                        <div class="description" style="text-align: left">
+                            <p>We're building a roster of favorite acts and venues so we can start comparing notes.</p> 
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        
+                        <a href="/login"><button class = "ui blue button">Login</button></a>
+                        <a href="/register"><button class = "ui green button" href="/register">Sign Me Up!</button></a>
+                        
+                        
+                    </div>
+                    
                 </div>
-                <div class="extra content">
-                    
-                    <a href="/login"><button class = "ui blue button">Login</button></a>
-                    <a href="/register"><button class = "ui green button" href="/register">Sign Me Up!</button></a>
-                    
+            <% } %>
+            
+            <% if(currentUser){ %>
+                <div class="ui card">
+                    <div class="content">
+                        <div class="header">What DJs should we follow?</div>
+                        
+                    </div>
+                    <div class="content">
+                        <form action="/artists/" method="post">
+                            
+                            <div class="description">
+                                <p>Add your faves to our list</p> 
+                            </div>
+                            
+                            <div class="item" style="margin: 25px auto;">
+                                <div class="ui icon input">
+                                    <input type="text" name="name" placeholder="Artist Name">
+                                </div>
+                            </div>
+                            
+                            <div class="content">
+                                <button class = "huge ui green button">Add an Artist</a>
+                            </div>
+                            
+                        </form>
+                </div>
+                </div>
+                
+                <div class="ui card">
+                    <div class="content">
+                        <div class="header">Where do you rave?</div>
+                        
+                    </div>
+                    <div class="content">
+                        <form action="/venues" method="post">
+                            
+                            <div class="description">
+                                <p>Tell us the hot spots</p> 
+                            </div>
+                            
+                            <div class="item" style="margin: 25px auto;">
+                                <div class="ui icon input">
+                                    <input type="text" name="name" placeholder="Venue Name">
+                                    <input class="hidden" type="text" name="location" value="125 E 11th St, New York, NY 10003">
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="content">
+                                <button class = "huge ui blue button">Add a Venue</a>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
                     
                 </div>
                 
-            </div>
-        <% } %>
+                
+            <% }; %>
+        </div>
         
-        <% if(currentUser){ %>
-            <div class="ui card">
-                <div class="content">
-                    <div class="header">What DJs should we follow?</div>
-                    
-                </div>
-                <div class="content">
-                    <form action="/artists/" method="post">
-                        
-                        <div class="description">
-                            <p>Add your faves to our list</p> 
-                        </div>
-                        
-                        <div class="item" style="margin: 25px auto;">
-                            <div class="ui icon input">
-                                <input type="text" name="name" placeholder="Artist Name">
+        <div class="row" style="margin: 25px auto">
+            <div class="slider">
+                <div class="ui cards">
+                    <% artists.forEach(function(artist){ %>
+                        <div class="ui card slide-item" href="/artists/<%= artist._id %>">
+                            
+                            <div class="content">
+                                <% if(artist.logo){ %>
+                                    <a class="ui image" href="/artists/<%= artist._id %>"><img src="<%= artist.logo %>"></a>
+                                <% } else { %>
+                                    <div class="header"><%= artist.name %></div>
+                                <% }; %>
                             </div>
-                        </div>
-                        
-                        <div class="content">
-                            <button class = "huge ui green button">Add an Artist</a>
-                        </div>
-                        
-                    </form>
-            </div>
-            </div>
-            
-            <div class="ui card">
-                <div class="content">
-                    <div class="header">Where do you rave?</div>
-                    
-                </div>
-                <div class="content">
-                    <form action="/venues" method="post">
-                        
-                        <div class="description">
-                            <p>Tell us the hot spots</p> 
-                        </div>
-                        
-                        <div class="item" style="margin: 25px auto;">
-                            <div class="ui icon input">
-                                <input type="text" name="name" placeholder="Venue Name">
-                                <input class="hidden" type="text" name="location" value="125 E 11th St, New York, NY 10003">
+                            
+                            <div class="content">
+                                <div class="description" style="text-align: left"><%= artist.blurb %></div>
                             </div>
+                            
+                            <div class="extra content">
+                                <% if(currentUser && artist.author.id.equals(currentUser._id)){ %>
+                                    <a href="/artists/<%= artist._id %>/edit"><button class="ui blue button">Edit Artist</button></a>
+                                    <form class="delete-form" action="/artists/<%= artist._id %>?_method=DELETE" method="POST">
+                                        <button class="ui negative button">Delete</button>
+                                    </form>
+                                <% }; %>
+                            </div>
+                            
                         </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+            
+        <div class="row">
+            <div class="ui cards">
+                <% venues.forEach(function(venue){ %>
+                <div class="ui card" href="/venues/<%= venue._id %>">
+                    
+                    <div class="content">
                         
+                        <div class="header"><%= venue.name %></div>
                         
-                        <div class="content">
-                            <button class = "huge ui blue button">Add a Venue</a>
-                        </div>
+                    </div>
+                    <div class="content">
+                        <a class="ui image" href="/venues/<%= venue._id %>"><img src="<%= venue.image %>"></a>
+                    </div>
+                    
+                    <div class="extra content">
                         
-                    </form>
+                        <% if(currentUser && venue.author.id.equals(currentUser._id)){ %>
+                        
+                            <a href="/venues/<%= venue._id %>/edit"><button class="ui blue button">Edit Venue</button></a>
+                            <form class="delete-form" action="/venues/<%= venue._id %>?_method=DELETE" method="POST">
+                                <button class="ui negative button">Delete</button>
+                            </form>
+                        
+                            
+                        <% }; %>
+                    </div>
                     
                 </div>
-                
+            <% }); %>
             </div>
-            
-            
-        <% }; %>
+        
     </div>
-    
+
 </div>
  		
 
