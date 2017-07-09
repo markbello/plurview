@@ -87,10 +87,10 @@
         </div>
         
         <div class="row" style="margin: 25px auto">
-            <div class="slider">
+            
                 <div class="ui cards">
                     <% artists.forEach(function(artist){ %>
-                        <div class="ui card slide-item" href="/artists/<%= artist._id %>">
+                        <div class="ui card" href="/artists/<%= artist._id %>">
                             
                             <div class="content">
                                 <% if(artist.logo){ %>
@@ -116,7 +116,7 @@
                         </div>
                     <% }); %>
                 </div>
-            </div>
+            
         </div>
             
         <div class="row">

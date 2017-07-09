@@ -55,7 +55,7 @@
     "map-stream": "0.0.7",
     "method-override": "^2.3.9",
     "moment": "^2.18.1",
-    "mongoose": "^4.10.3",
+    "mongoose": "^4.11.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
