@@ -86,7 +86,7 @@
             <% }; %>
         </div>
         
-        <div class="row" style="margin: 25px auto">
+        <div class="row" style="display: flex; margin: 25px auto">
             
                 <div class="ui cards">
                     <% artists.forEach(function(artist){ %>
@@ -115,40 +115,36 @@
                             
                         </div>
                     <% }); %>
+                    
+                    <% venues.forEach(function(venue){ %>
+                        <div class="ui card" href="/venues/<%= venue._id %>">
+                            
+                            <div class="content">
+                                
+                                <div class="header"><%= venue.name %></div>
+                                
+                            </div>
+                            <div class="content">
+                                <a class="ui image" href="/venues/<%= venue._id %>"><img src="<%= venue.image %>"></a>
+                            </div>
+                            
+                            <div class="extra content">
+                                <% if(currentUser && venue.author.id.equals(currentUser._id)){ %>
+                                    <a href="/venues/<%= venue._id %>/edit"><button class="ui blue button">Edit Venue</button></a>
+                                    <form class="delete-form" action="/venues/<%= venue._id %>?_method=DELETE" method="POST">
+                                        <button class="ui negative button">Delete</button>
+                                    </form>
+                                <% }; %>
+                            </div>
+                        </div>
+                    <% }); %>
+            </div>
                 </div>
             
         </div>
             
         <div class="row">
-            <div class="ui cards">
-                <% venues.forEach(function(venue){ %>
-                <div class="ui card" href="/venues/<%= venue._id %>">
-                    
-                    <div class="content">
-                        
-                        <div class="header"><%= venue.name %></div>
-                        
-                    </div>
-                    <div class="content">
-                        <a class="ui image" href="/venues/<%= venue._id %>"><img src="<%= venue.image %>"></a>
-                    </div>
-                    
-                    <div class="extra content">
-                        
-                        <% if(currentUser && venue.author.id.equals(currentUser._id)){ %>
-                        
-                            <a href="/venues/<%= venue._id %>/edit"><button class="ui blue button">Edit Venue</button></a>
-                            <form class="delete-form" action="/venues/<%= venue._id %>?_method=DELETE" method="POST">
-                                <button class="ui negative button">Delete</button>
-                            </form>
-                        
-                            
-                        <% }; %>
-                    </div>
-                    
-                </div>
-            <% }); %>
-            </div>
+            
         
     </div>
 
