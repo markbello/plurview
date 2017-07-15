@@ -33,7 +33,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
         if(err){
             console.log(err);
         } else{
-            res.redirect("/artists");
+            res.redirect("/");
         }
     });
     
@@ -85,9 +85,10 @@ router.put("/:id", middleware.checkArtistOwnership, function(req, res){
 router.delete("/:id", middleware.checkArtistOwnership, function(req, res){
     Artist.findByIdAndRemove(req.params.id, function(err){
         if(err){
-            res.redirect("/artists");
+            res.redirect("/");
         } else{
-            res.redirect("/artists");
+            req.flash("success", "Poof! Artist deleted");
+            res.redirect("/");
         }
     });
 });

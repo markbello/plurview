@@ -39,8 +39,9 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
             console.log(err);
         } else {
             //redirect back to venues page
+            req.flash("success", newlyCreated + " - wow what a great place to party!");
             console.log(newlyCreated);
-            res.redirect("/venues");
+            res.redirect("/");
         }
     });
   });
@@ -100,9 +101,10 @@ router.put("/:id", middleware.checkVenueOwnership, function(req, res){
 router.delete("/:id", middleware.checkVenueOwnership, function(req, res){
     Venue.findByIdAndRemove(req.params.id, function(err){
         if(err){
-            res.redirect("/venues");
+            res.redirect("/");
         } else{
-            res.redirect("/venues");
+            req.flash("success", "Venue deleted from our database, forever in our hearts tho...");
+            res.redirect("/");
         }
     });
 });
