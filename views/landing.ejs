@@ -7,7 +7,6 @@
                 <div class="ui card">
                     <div class="content">
                         <div class="header">Welcome to PLURview</div>
-                        
                     </div>
                     <div class="extra content">
                         <div class="description" style="text-align: left">
@@ -15,13 +14,9 @@
                         </div>
                     </div>
                     <div class="extra content">
-                        
                         <a href="/login"><button class = "ui blue button">Login</button></a>
                         <a href="/register"><button class = "ui green button" href="/register">Sign Me Up!</button></a>
-                        
-                        
                     </div>
-                    
                 </div>
             <% } %>
             
@@ -29,7 +24,6 @@
                 <div class="ui card">
                     <div class="content">
                         <div class="header">What DJs should we follow?</div>
-                        
                     </div>
                     <div class="content">
                         <form action="/artists/" method="post">
@@ -49,13 +43,12 @@
                             </div>
                             
                         </form>
-                </div>
+                    </div>
                 </div>
                 
                 <div class="ui card">
                     <div class="content">
                         <div class="header">Where do you rave?</div>
-                        
                     </div>
                     <div class="content">
                         <form action="/venues" method="post">
@@ -77,77 +70,64 @@
                             </div>
                             
                         </form>
-                        
                     </div>
                     
                 </div>
-                
-                
             <% }; %>
-        </div>
-        
-        <div class="row" style="display: flex; margin: 25px auto">
             
-                <div class="ui cards">
-                    <% artists.forEach(function(artist){ %>
-                        <div class="ui card" href="/artists/<%= artist._id %>">
+            <div class="ui cards">
+                <% artists.forEach(function(artist){ %>
+                    <div class="ui card" href="/artists/<%= artist._id %>">
+                        
+                        <div class="content">
+                            <% if(artist.logo){ %>
+                                <a class="ui image" href="/artists/<%= artist._id %>"><img src="<%= artist.logo %>"></a>
+                            <% } else { %>
+                                <div class="header"><%= artist.name %></div>
+                            <% }; %>
+                        </div>
+                        
+                        <div class="content">
+                            <div class="description" style="text-align: left"><%= artist.blurb %></div>
+                        </div>
+                        
+                        <div class="extra content">
+                            <% if(currentUser && artist.author.id.equals(currentUser._id)){ %>
+                                <a href="/artists/<%= artist._id %>/edit"><button class="ui blue button">Edit Artist</button></a>
+                                <form class="delete-form" action="/artists/<%= artist._id %>?_method=DELETE" method="POST">
+                                    <button class="ui negative button">Delete</button>
+                                </form>
+                            <% }; %>
+                        </div>
+                        
+                    </div>
+                <% }); %>
+                
+                <% venues.forEach(function(venue){ %>
+                    <div class="ui card" href="/venues/<%= venue._id %>">
+                        
+                        <div class="content">
                             
-                            <div class="content">
-                                <% if(artist.logo){ %>
-                                    <a class="ui image" href="/artists/<%= artist._id %>"><img src="<%= artist.logo %>"></a>
-                                <% } else { %>
-                                    <div class="header"><%= artist.name %></div>
-                                <% }; %>
-                            </div>
-                            
-                            <div class="content">
-                                <div class="description" style="text-align: left"><%= artist.blurb %></div>
-                            </div>
-                            
-                            <div class="extra content">
-                                <% if(currentUser && artist.author.id.equals(currentUser._id)){ %>
-                                    <a href="/artists/<%= artist._id %>/edit"><button class="ui blue button">Edit Artist</button></a>
-                                    <form class="delete-form" action="/artists/<%= artist._id %>?_method=DELETE" method="POST">
-                                        <button class="ui negative button">Delete</button>
-                                    </form>
-                                <% }; %>
-                            </div>
+                            <div class="header"><%= venue.name %></div>
                             
                         </div>
-                    <% }); %>
-                    
-                    <% venues.forEach(function(venue){ %>
-                        <div class="ui card" href="/venues/<%= venue._id %>">
-                            
-                            <div class="content">
-                                
-                                <div class="header"><%= venue.name %></div>
-                                
-                            </div>
-                            <div class="content">
-                                <a class="ui image" href="/venues/<%= venue._id %>"><img src="<%= venue.image %>"></a>
-                            </div>
-                            
-                            <div class="extra content">
-                                <% if(currentUser && venue.author.id.equals(currentUser._id)){ %>
-                                    <a href="/venues/<%= venue._id %>/edit"><button class="ui blue button">Edit Venue</button></a>
-                                    <form class="delete-form" action="/venues/<%= venue._id %>?_method=DELETE" method="POST">
-                                        <button class="ui negative button">Delete</button>
-                                    </form>
-                                <% }; %>
-                            </div>
+                        <div class="content">
+                            <a class="ui image" href="/venues/<%= venue._id %>"><img src="<%= venue.image %>"></a>
                         </div>
-                    <% }); %>
+                        
+                        <div class="extra content">
+                            <% if(currentUser && venue.author.id.equals(currentUser._id)){ %>
+                                <a href="/venues/<%= venue._id %>/edit"><button class="ui blue button">Edit Venue</button></a>
+                                <form class="delete-form" action="/venues/<%= venue._id %>?_method=DELETE" method="POST">
+                                    <button class="ui negative button">Delete</button>
+                                </form>
+                            <% }; %>
+                        </div>
+                    </div>
+                <% }); %>
             </div>
-                </div>
-            
-        </div>
-            
-        <div class="row">
-            
-        
+         </div>
     </div>
-
 </div>
  		
 
